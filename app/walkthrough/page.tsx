@@ -1,38 +1,5 @@
-import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { GuidePage, guideMetadata } from "../guide-page";
-
-export const metadata = guideMetadata(
-  "The Blood of Dawnwalker Walkthrough: Quest Order & Choices",
-  "A spoiler-aware The Blood of Dawnwalker walkthrough hub: prologue quest order, timed choices, romance routes, quest answers and current patch status.",
-  "/walkthrough",
-  ["The Blood of Dawnwalker walkthrough", "Blood of Dawnwalker quest guide", "Dawnwalker choices", "Dawnwalker prologue walkthrough", "Dawnwalker quest order"],
-);
-
-export default function WalkthroughPage() {
-  return <GuidePage
-    eyebrow="WALKTHROUGH HUB · SPOILER AWARE"
-    title="The Blood of Dawnwalker walkthrough: quest order, choices and answers"
-    dek="Use this as a route map, not a fake 'complete' guide. Open the exact answer you need, check the spoiler label and return here as verified launch-build quest pages are added."
-    checked="September 4, 2026"
-    quickAnswer={<div className="answer-visual"><div><span>START HERE</span><h2>Plan the prologue first, then solve one quest or decision at a time.</h2><p>Timed objectives show a clock; actions that consume segments show an hourglass and cost.</p></div><Image src="/dawnwalker-coen.png" alt="Coen in The Blood of Dawnwalker" width={1280} height={720} priority /></div>}
-    nextSteps={[
-      { label: "Find all sword shards", href: "/forge-it-anew", description: "Complete the rising Forge It Anew quest search." },
-      { label: "Plan the endings", href: "/endings", description: "Protect the deadline and finale save points." },
-      { label: "Start a trophy roadmap", href: "/trophy-guide", description: "Use the save-first Platinum plan before decisive quests." },
-      { label: "See the day-30 outcome", href: "/what-happens-after-30-days", description: "Know what the timer permanently changes." },
-    ]}
-    sources={[
-      { label: "Bandai Namco — official gameplay and time-system recap", href: "https://en.bandainamcoent.eu/dawnwalker/news/the-blood-of-dawnwalker-gameplay-reveal-recap" },
-      { label: "PC Gamer — tested prologue quest order", href: "https://www.pcgamer.com/games/rpg/blood-of-dawnwalker-prologue-quests-order/" },
-      { label: "PowerPyx — launch-build all-quests index", href: "https://www.powerpyx.com/the-blood-of-dawnwalker-walkthrough-all-quests/" },
-    ]}
-    sections={[
-      { title: "Choose the answer you need", body: <div className="guide-map"><Link href="/prologue-quest-order"><span>01</span><b>Prologue route</b><small>Eight segments and what to do before Mass.</small></Link><Link href="/how-many-spoonfuls-of-herbs"><span>02</span><b>Withering Away medicine</b><small>Hot water and three spoonfuls.</small></Link><Link href="/forge-it-anew"><span>03</span><b>Forge It Anew</b><small>All three sword shards and Uriashi.</small></Link><Link href="/font-of-life"><span>04</span><b>Font of Life</b><small>Anca&apos;s route and romance save point.</small></Link><Link href="/lacra-romance"><span>05</span><b>Lacra romance</b><small>Quest order and Mandrake branch.</small></Link><Link href="/time-system"><span>06</span><b>Time and quest expiry</b><small>Icons, checkpoints and the 30-day pressure.</small></Link><Link href="/what-happens-after-30-days"><span>07</span><b>After 30 days</b><small>The deadline consequence and what remains.</small></Link><Link href="/endings"><span>08</span><b>Endings and saves</b><small>Spoiler-marked outcome planning.</small></Link><Link href="/trophy-guide"><span>09</span><b>Trophy roadmap</b><small>Platinum planning and manual-save rotation.</small></Link><Link href="/patch-notes"><span>10</span><b>Patch status</b><small>Check whether a quest blocker was fixed.</small></Link></div> },
-      { title: "How to use this walkthrough without spoiling the game", body: <div className="spoiler-scale"><div><b>LOW</b><span>Quest order and time cost</span></div><div><b>MEDIUM</b><span>Objective steps and rewards</span></div><div><b>HIGH</b><span>Consequences, deaths and endings</span></div></div> },
-      { title: "Walkthrough coverage status", body: <div className="coverage-board"><div><b>LIVE</b><span>Prologue order</span></div><div><b>LIVE</b><span>Medicine recipe</span></div><div><b>LIVE</b><span>Forge It Anew</span></div><div><b>LIVE</b><span>Time-system and endings</span></div><div className="pending"><b>BUILDING</b><span>More named quest choices</span></div><div className="pending"><b>NEEDS ORIGINAL DATA</b><span>Map and collectibles</span></div></div> },
-      { title: "What deserves its own page", body: <p>A question becomes a separate guide when it has a distinct search intent and enough evidence for a complete answer—such as one quest route, one choice consequence or one collectible set. Minor dialogue variations stay inside their parent quest so the site does not create dozens of thin, competing pages.</p> },
-      { title: "Launch help while playing", body: <div className="fact-grid"><p><b>Controller movement</b>If sprint stops while turning diagonally, use the <Link href="/controller-movement-fix">illustrated controller fix</Link>.</p><p><b>Crashes or stutter</b>Check the <Link href="/known-issues">known-issues tracker</Link> before changing several settings.</p><p><b>PC compatibility</b>Compare official specifications in the <Link href="/can-i-run">PC checker</Link>.</p><p><b>Console modes</b>Compare PS5, PS5 Pro and Xbox targets in the <Link href="/console-performance">performance guide</Link>.</p></div> },
-    ]}
-  />;
-}
+import { guides } from "../levels";
+export const metadata: Metadata = { title: "Royal Smash Walkthrough – All Levels 51–80", description: "Complete Royal Smash walkthrough index for levels 51 to 80. Open the exact hard-level solution you need.", alternates: { canonical: "/walkthrough" } };
+export default function Walkthrough(){return <main className="page"><p className="eyebrow">WALKTHROUGH INDEX</p><h1>Royal Smash Levels <em>51–80</em></h1><p className="dek">Pick your level for a short solution, the key target, and recovery advice when the physics do not fall as expected.</p>{[51,61,71].map(start=><section className="range" key={start}><div><span>{start}–{start+9}</span><h2>{start === 51 ? "The challenge begins" : start === 61 ? "Precision & timing" : "Advanced collapses"}</h2></div><div className="range-links">{guides.filter(g=>g.level>=start&&g.level<=start+9).map(g=><Link href={`/level/${g.level}`} key={g.level}><b>Level {g.level}</b><small>{g.difficulty} · {g.mechanic}</small><span>→</span></Link>)}</div></section>)}</main>}

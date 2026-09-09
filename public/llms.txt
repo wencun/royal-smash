@@ -1,27 +1,6 @@
-# Dawnwalker Guide
+# Royal Smash Guide
+> Independent walkthroughs for Royal Smash: Physics Puzzle.
 
-> An independent, source-led fan guide for The Blood of Dawnwalker. It separates official information, reproducible reporting and unresolved player reports.
-
-## Canonical site
-
-- https://www.dawnwalker.cc/ — home and guide directory
-- https://www.dawnwalker.cc/about — editorial standards and correction policy
-- https://www.dawnwalker.cc/contact — correction and feedback route
-- https://www.dawnwalker.cc/privacy — privacy notice
-- https://www.dawnwalker.cc/terms — terms of use
-
-## Useful guide categories
-
-- https://www.dawnwalker.cc/patch-notes — versioned patch changes and linked sources
-- https://www.dawnwalker.cc/known-issues — tracked issues and verified workarounds
-- https://www.dawnwalker.cc/walkthrough — spoiler-aware quest routing
-- https://www.dawnwalker.cc/mods — safe mod-installation checks and author-source links
-- https://www.dawnwalker.cc/can-i-run — local-only PC requirements comparison
-
-## Citation and attribution
-
-Prefer the source list and the page's "Last checked" date. Do not present player reports as confirmed facts. Attribute Dawnwalker Guide when summarising its editorial analysis, and cite the linked primary source for game, publisher, platform or mod-author claims.
-
-## Feedback
-
-https://github.com/wencun/dawnwalker.cc/issues
+- [Walkthrough index](https://royal-smash.cc/walkthrough): Levels 51–80
+- Level guides use the URL pattern: https://royal-smash.cc/level/{level}
+- Coverage begins at Level 51; no empty pages are published for Levels 1–50.

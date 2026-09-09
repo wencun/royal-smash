@@ -1,42 +1,17 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import Link from "next/link";
 import "./globals.css";
-import { AdConsentProvider } from "./ad-consent";
-import { PopunderAd, SocialBarAd, TopNativeAd } from "./ad-slot";
-import { SiteNav } from "./site-nav";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.dawnwalker.cc"),
-  title: { default: "The Blood of Dawnwalker Guides, Quest Answers & Fixes", template: "%s | Dawnwalker Guide" },
-  description: "Independent The Blood of Dawnwalker guides for quests, mods, romance, PC requirements, console performance, the time system and verified fixes.",
-  keywords: ["The Blood of Dawnwalker", "Blood of Dawnwalker release date", "The Blood of Dawnwalker gameplay", "The Blood of Dawnwalker guide", "Blood of Dawnwalker PS5", "Blood of Dawnwalker Xbox", "Blood of Dawnwalker PC", "Blood of Dawnwalker editions"],
+  metadataBase: new URL("https://royal-smash.cc"),
+  title: { default: "Royal Smash Walkthroughs & Level Solutions", template: "%s | Royal Smash Guide" },
+  description: "Clear Royal Smash: Physics Puzzle levels 51–80 with short step-by-step solutions, mistake fixes, and fast level navigation.",
   alternates: { canonical: "/" },
-  openGraph: { type: "website", siteName: "Dawnwalker Guide", locale: "en_US", title: "The Blood of Dawnwalker Guides, Release Date & Platforms", description: "Spoiler-aware, verified guides and launch updates.", images: ["/og.png"] },
-  twitter: { card: "summary_large_image", title: "The Blood of Dawnwalker Guides | Dawnwalker Guide", description: "Release, platforms and verified player guides.", images: ["/og.png"] },
+  openGraph: { type: "website", siteName: "Royal Smash Guide", title: "Royal Smash Walkthroughs & Level Solutions", description: "Fast, focused help for Royal Smash levels 51–80.", url: "https://royal-smash.cc" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
-  other: { "google-adsense-account": "ca-pub-4539826019899948" },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const siteSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      { "@type": "Organization", "@id": "https://www.dawnwalker.cc/#publisher", name: "Dawnwalker Guide", url: "https://www.dawnwalker.cc/", sameAs: ["https://github.com/wencun/dawnwalker.cc"] },
-      { "@type": "WebSite", "@id": "https://www.dawnwalker.cc/#website", name: "Dawnwalker Guide", url: "https://www.dawnwalker.cc/", inLanguage: "en", description: "Independent guides for The Blood of Dawnwalker", publisher: { "@id": "https://www.dawnwalker.cc/#publisher" }, sameAs: ["https://github.com/wencun/dawnwalker.cc"] },
-    ],
-  };
-  return <html lang="en">
-    <body>
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-21QC2EJC4L" strategy="afterInteractive" />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-21QC2EJC4L');`}
-      </Script>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }} />
-      <AdConsentProvider><PopunderAd /><SiteNav /><TopNativeAd />{children}<SocialBarAd /></AdConsentProvider>
-    </body>
-  </html>;
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const schema = { "@context": "https://schema.org", "@type": "WebSite", name: "Royal Smash Guide", url: "https://royal-smash.cc/", description: "Independent Royal Smash: Physics Puzzle walkthroughs." };
+  return <html lang="en"><body><header className="nav"><Link className="logo" href="/"><span>♛</span> ROYAL <b>SMASH</b><small>PHYSICS PUZZLE GUIDE</small></Link><nav aria-label="Main navigation"><Link href="/walkthrough">All levels</Link><Link href="/about">About</Link></nav></header><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />{children}<footer><div><Link className="logo" href="/"><span>♛</span> ROYAL <b>SMASH</b></Link><p>Independent walkthrough site. Not affiliated with the game publisher.</p></div><nav><Link href="/walkthrough">Levels 51–80</Link><Link href="/privacy">Privacy</Link><Link href="/contact">Corrections</Link></nav><small>© 2026 Royal Smash Guide</small></footer></body></html>;
 }

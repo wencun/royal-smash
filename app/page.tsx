@@ -1,55 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ContentAd, NativeContentAd } from "./ad-slot";
-import { SiteFooter } from "./site-footer";
+import { guides } from "./levels";
 
-export const metadata: Metadata = {
-  title: { absolute: "The Blood of Dawnwalker Guides, Quest Answers & Fixes" },
-  description: "Practical The Blood of Dawnwalker guides for quests, mods, romance, PC requirements, PS5 performance, the 30-day timer and verified launch fixes.",
-  alternates: { canonical: "/", languages: { en: "/", pl: "/pl", ru: "/ru", cs: "/cs", "x-default": "/" } },
-};
-
-const cards = [
-  ["Quest escape", "Home Sweet Home time loop", "Find the well that ends the repeating dream, avoid the trap and see the reward without a broad walkthrough.", "/home-sweet-home"],
-  ["PC flickering", "Flickering lights or screen shimmer?", "Start with the current Frame Generation, Ultra post-processing and FPS-cap checks before trying a mod or driver rollback.", "/flickering-fix"],
-  ["Save lock", "Can't save or “Saving is currently locked”?", "Protect the current run, identify a normal mission lock versus a stuck progression event, and use the separate diagnostic path.", "/cant-save"],
-  ["Patch 1.0.2", "What did the latest hotfix fix?", "Check the official quest, controller and known-issue changes before trying an old workaround.", "/patch-notes"],
-  ["PC fix", "Crashing or stuttering?", "Match the exact symptom to the official Full Screen workaround or safe crash checks.", "/crash-and-stutter-fix"],
-  ["Quest route", "Forge It Anew sword shards", "Follow the illustrated route from St. Mihai's note to all three shards, Uriashi and the ritual.", "/forge-it-anew"],
-  ["Time consequence", "What happens after 30 days?", "See the story consequence, what remains playable and the two-save plan before the deadline.", "/what-happens-after-30-days"],
-  ["New Game Plus", "Does Dawnwalker have NG+?", "See the current postgame status, what carries over, and the saves to keep before reaching the credits.", "/new-game-plus"],
-  ["Merchant", "Where can you sell silver?", "Unlock the Silver Trader, find the Svartrau location and avoid making the trip before the prerequisite quest.", "/silver-trader"],
-  ["Boss route", "Who is Xanthe and how do you reach her?", "Track the Court route, protect a pre-boss save and understand the Vrakhir-blood choice.", "/xanthe-boss-guide"],
-  ["Romance route", "How do you romance Lacra?", "Follow the spoiler-marked quest order, then protect the Mandrake choice with a manual save.", "/lacra-romance"],
-  ["Anca quest", "Where is the Font of Life?", "Follow the late Anca route and save before the inn conversation that follows the Font objective.", "/font-of-life"],
-  ["Completion", "Trophy and Platinum roadmap", "Plan the 47-trophy launch list, difficulty requirement and save rotation before locking a route.", "/trophy-guide"],
-  ["Gear", "What is the best armor?", "Compare confirmed legendary routes and pick sword, tank or vampire gear without chasing an unverified early set.", "/best-armor"],
-  ["Endings", "How many endings are there?", "Use a spoiler-marked outcome guide and save plan instead of replaying the whole opening blind.", "/endings"],
-  ["Walkthrough", "Quest order, choices and missable answers", "Start with the prologue route, then open a focused answer for the exact quest or choice blocking your run.", "/walkthrough"],
-  ["PC mods", "Dawnwalker mods on Nexus", "Open the live Nexus directory, then use version, dependency and save-safety checks before installing.", "/mods"],
-  ["Launch fix", "Controller stops sprinting or slows down?", "Follow the illustrated Steam Input deadzone workaround for diagonal movement, with separate PC and PS5 guidance.", "/controller-movement-fix"],
-  ["Prologue answer", "How many spoonfuls of herbs?", "Choose hot water and three spoonfuls in Withering Away to prepare Esme's medicine correctly.", "/how-many-spoonfuls-of-herbs"],
-  ["Release date", "When does The Blood of Dawnwalker release?", "September 3, 2026. See supported platforms, time zones and official sources.", "/release-date"],
-  ["Gameplay", "How does The Blood of Dawnwalker play?", "A source-led overview of day and night, combat, choices and the 30-day time pressure—without inventing mechanics.", "/gameplay"],
-  ["PC tool", "Can I run it?", "A local-only official requirements checker. Compare CPU, GPU, RAM, VRAM and SSD space without uploading your information.", "/can-i-run"],
-  ["Performance", "PS5 & Xbox modes", "Official launch targets for PS5, PS5 Pro, Xbox Series X and Series S—kept separate from player benchmarks.", "/console-performance"],
-  ["Editions", "Which edition should I buy?", "Compare Standard, Eclipse, Day One and Collector's contents, the pre-order bonus and the shared release date.", "/editions"],
-  ["Reviews", "The Blood of Dawnwalker reviews are live", "The review embargo lifted August 31. Compare original PC and PS5 reviews, disclosed hardware and performance context.", "/review-embargo"],
-  ["Time limit", "How does the 30-day time limit work?", "Official answers on 8 daytime parts, what advances time, exploration and whether you can complete every quest.", "/time-system"],
-  ["Relationships", "Who can you romance?", "A spoiler-aware guide to the confirmed Anca, Lacra and Crake (Marat) routes, their starting quests and multiple-romance rules.", "/romance"],
-  ["Game length", "How long does Dawnwalker take to beat?", "Compare main-story, broader exploration and completion estimates without confusing the 30-day clock with real hours.", "/how-long-to-beat"],
-];
+export const metadata: Metadata = { title: { absolute: "Royal Smash Walkthroughs: Level 51–80 Solutions" }, description: "Stuck in Royal Smash? Find direct walkthroughs for levels 51 through 80, including hard and super hard physics puzzles.", alternates: { canonical: "/" } };
 
 export default function Home() {
-  return <main>
-    <section className="hero" id="top"><div className="hero-art" aria-hidden="true"><Image src="/dawnwalker-hero.jpg" alt="" width={1920} height={1080} priority sizes="100vw" /></div><div className="hero-copy"><p className="eyebrow">THE BLOOD OF DAWNWALKER · INDEPENDENT GUIDE</p><p className="hero-kicker">QUEST ANSWERS · VERIFIED FIXES</p><h1>The Blood of Dawnwalker <em>guides that answer the question.</em></h1><p className="lead">Spoiler-aware quest routes, mods, romance choices, performance help and launch fixes—each separated into confirmed facts, tested reporting and unresolved claims.</p><div className="hero-actions"><Link className="primary" href="/walkthrough">Open walkthrough</Link><Link className="secondary" href="/known-issues">Known issues</Link></div></div><aside className="clock-card"><p>GAME STATUS</p><div className="day">LIVE</div><div className="bar"><i /></div><small>PC · PlayStation 5<br />Xbox Series X|S</small></aside></section>
-    <section className="signal"><span>✦ HOTFIX 1.0.2</span><p>Update first, then match the symptom. Read the <Link href="/patch-notes">illustrated patch notes</Link>, use the <Link href="/crash-and-stutter-fix">crash and stutter guide</Link>, or follow the controller fix if sprint still stops.</p><Link href="/patch-notes">See what changed →</Link></section>
-    <ContentAd />
-    <section className="section intro"><div><p className="eyebrow">USEFUL, NOT NOISY</p><h2>How do we answer the question you have now?</h2></div><div className="intro-copy"><p>We build pages around a player&apos;s question—not a list of duplicate keywords. Every guide names its evidence, date checked and spoiler level.</p><span>OFFICIAL · VERIFIED · COMMUNITY REPORT</span></div></section>
-    <section className="section"><div className="section-head"><div><p className="eyebrow">START HERE</p><h2>Which Dawnwalker guide do you need?</h2></div></div><div className="route-grid">{cards.map(([tag,title,text,href], index) => <article className={`feature-card ${index === 0 ? "crimson" : index === 1 ? "night-card" : "archive-card"}`} key={href}><span>0{index + 1} · {tag}</span><h3>{title}</h3><p>{text}</p><Link href={href}>Open guide →</Link></article>)}</div></section>
-    <NativeContentAd />
-    <section className="section library home-deferred"><div className="section-head"><div><p className="eyebrow">EDITORIAL STANDARD</p><h2>How can you cite and check this guide?</h2></div></div><div className="library-grid"><div><strong>01</strong><span>Official source links</span></div><div><strong>02</strong><span>Last-checked dates</span></div><div><strong>03</strong><span>Spoiler labels</span></div><div><strong>04</strong><span>Corrections welcome</span></div></div><div className="home-citation"><h3>What readers can verify</h3><table className="editorial-table"><caption>Our source and correction standard</caption><thead><tr><th scope="col">We show</th><th scope="col">Why it matters</th></tr></thead><tbody><tr><th scope="row">Named sources</th><td>Readers can open the original publisher, platform or author page behind a factual claim.</td></tr><tr><th scope="row">Review date</th><td>Time-sensitive information carries a visible last-checked date.</td></tr><tr><th scope="row">Feedback route</th><td>Errors and missing evidence can be reported in the public <a href="https://github.com/wencun/dawnwalker.cc/issues" target="_blank" rel="noreferrer">correction tracker ↗</a>.</td></tr></tbody></table><p>Read our <Link href="/about">editorial policy</Link> or <Link href="/contact">send a correction</Link>.</p></div></section>
-    <SiteFooter />
-  </main>;
+  return <main><section className="hero"><div className="hero-copy"><p className="eyebrow">THE UNOFFICIAL WALKTHROUGH</p><h1>Every tower has a <em>weak point.</em></h1><p>Direct, step-by-step Royal Smash: Physics Puzzle solutions for the levels where the challenge starts to bite.</p><div className="actions"><Link className="button" href="/level/51">Start at Level 51</Link><Link className="text-link" href="/walkthrough">Browse all levels →</Link></div></div><div className="tower" aria-label="Decorative collapsing block tower"><i/><i/><i/><i/><i/><i/><span>SMASH</span></div></section><section className="quick"><div><b>30</b><span>LEVEL GUIDES</span></div><div><b>51–80</b><span>HARD LEVELS</span></div><div><b>3</b><span>STEPS PER SOLUTION</span></div></section><section className="section"><div className="section-title"><div><p className="eyebrow">CHOOSE YOUR LEVEL</p><h2>Royal Smash level solutions</h2></div><p>Jump directly to the puzzle blocking you. Every page keeps the answer first and links to the levels before and after it.</p></div><div className="level-grid">{guides.map(g => <Link href={`/level/${g.level}`} key={g.level} className={g.difficulty === "Super Hard" ? "featured" : ""}><small>{g.difficulty}</small><strong>{g.level}</strong><span>{g.mechanic} →</span></Link>)}</div></section><section className="how"><p className="eyebrow">HOW TO USE THESE GUIDES</p><h2>Observe. Aim. Let physics finish.</h2><div><article><b>01</b><h3>Match the layout</h3><p>Confirm you are on the correct level before making the first move.</p></article><article><b>02</b><h3>Make one move</h3><p>Follow each step in order. The first weak point determines the whole collapse.</p></article><article><b>03</b><h3>Wait for motion</h3><p>Let every block settle before the next input to avoid wasting a move.</p></article></div></section></main>;
 }
