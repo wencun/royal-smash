@@ -16,8 +16,8 @@ test("level pages are static, canonical, structured, and internally linked", asy
   const source = await read("app/level/[level]/page.tsx");
   assert.match(source, /dynamicParams = false/);
   assert.match(source, /generateStaticParams/);
-  assert.match(source, /alternates:\{canonical:/);
-  assert.match(source, /"@type":"HowTo"/);
+  assert.match(source, /alternates:\s*\{\s*canonical:/);
+  assert.match(source, /"@type":\s*"HowTo"/);
   assert.match(source, /PREVIOUS/);
   assert.match(source, /NEXT/);
 });
@@ -41,4 +41,16 @@ test("navigation exposes working level, download, and mobile destinations", asyn
   assert.match(homepage, /play\.google\.com\/store\/apps\/details\?id=com\.cyphergames\.royalsmash/);
   assert.match(search, /router\.push\(`\/level\/\$\{selected\}`\)/);
   assert.match(search, /selected < 51 \|\| selected > 80/);
+});
+
+
+test("groups guides by ten and publishes Apple and per-level video destinations", async () => {
+  const [homepage, levelPage, media] = await Promise.all([read("app/page.tsx"), read("app/level/[level]/page.tsx"), read("app/media.ts")]);
+  assert.match(homepage, /guideGroups = \[51, 61, 71\]/);
+  assert.match(homepage, /apps\.apple\.com\/us\/search/);
+  assert.match(homepage, /Featured Levels/);
+  assert.match(levelPage, /className="level-video"/);
+  assert.match(levelPage, /Levels \{groupStart\}–\{groupStart \+ 9\}/);
+  assert.match(media, /PLRUqLxqZJLf0/);
+  assert.match(media, /index=\$\{videoIndex\(level\)\}/);
 });
