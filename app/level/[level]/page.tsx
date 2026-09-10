@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ level: st
 }
 export default async function LevelPage({ params }: { params: Promise<{ level: string }> }) {
   const { level } = await params; const guide = getGuide(Number(level)); if (!guide) notFound();
-  const groupStart = Math.floor((guide.level - 51) / 10) * 10 + 51;
+  const groupStart = Math.floor((guide.level - 1) / 10) * 10 + 1;
   const related = guides.filter((item) => item.level >= groupStart && item.level <= groupStart + 9);
   const schema = { "@context": "https://schema.org", "@type": "HowTo", name: `How to beat Royal Smash Level ${guide.level}`, step: guide.steps.map((text, index) => ({ "@type": "HowToStep", position: index + 1, text })) };
   return <main className="guide">
@@ -23,7 +23,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
     <section><p className="eyebrow">STEP-BY-STEP SOLUTION</p><h2>How to beat Royal Smash Level {guide.level}</h2><ol className="steps">{guide.steps.map((step, index) => <li key={step}><b>0{index + 1}</b><div><h3>{index === 0 ? "Find the weak point" : index === 1 ? "Wait for the shift" : "Finish the collapse"}</h3><p>{step}</p></div></li>)}</ol></section>
     <section className="trouble"><div><p className="eyebrow">COMMON MISTAKE</p><h2>If the solution does not work</h2><p>{guide.mistake}</p></div><div><h3>Try this next</h3><p>{guide.fallback}</p></div></section>
     <section className="related-levels"><p className="eyebrow">THIS CHAPTER</p><h2>Levels {groupStart}–{groupStart + 9}</h2><div>{related.map((item) => <Link className={item.level === guide.level ? "active" : ""} href={`/level/${item.level}`} key={item.level}>{item.level}</Link>)}</div></section>
-    <nav className="prev-next">{guide.level > 51 ? <Link href={`/level/${guide.level - 1}`}><small>← PREVIOUS</small><b>Level {guide.level - 1}</b></Link> : <span />}{guide.level < 80 ? <Link href={`/level/${guide.level + 1}`}><small>NEXT →</small><b>Level {guide.level + 1}</b></Link> : <Link href="/walkthrough"><small>ALL GUIDES →</small><b>Walkthrough index</b></Link>}</nav>
+    <nav className="prev-next">{guide.level > 1 ? <Link href={`/level/${guide.level - 1}`}><small>← PREVIOUS</small><b>Level {guide.level - 1}</b></Link> : <span />}{guide.level < 80 ? <Link href={`/level/${guide.level + 1}`}><small>NEXT →</small><b>Level {guide.level + 1}</b></Link> : <Link href="/walkthrough"><small>ALL GUIDES →</small><b>Walkthrough index</b></Link>}</nav>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
   </main>;
 }
