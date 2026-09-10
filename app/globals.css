@@ -31,3 +31,4 @@
 .level-neighbor-disabled{border-style:dashed;background:transparent;opacity:.6}
 @media(max-width:850px){.level-neighbors{margin-top:25px}}
 @media(max-width:520px){.reference-logo small{display:none}.level-neighbors{grid-template-columns:1fr}.level-neighbors .next-level{text-align:left}}
+.hero-copy h1>span,.hero-copy h1>strong{display:block}.hero-copy h1>span{font-size:.72em;line-height:1.12}.hero-copy h1>strong{margin-top:5px}

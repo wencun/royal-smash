@@ -38,13 +38,22 @@ const faqs = [
 ];
 
 export default function Home() {
+  const gameSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    name: "Royal Smash! - Physics Puzzle",
+    url: "https://royal-smash.cc/",
+    gamePlatform: ["Android", "iOS"],
+    applicationCategory: "Puzzle Game",
+    sameAs: [googlePlayUrl, appStoreUrl],
+  };
   return (
     <main>
       <section className="reference-hero">
         <div className="hero-inner">
           <div className="hero-copy">
             <span className="hero-pill">THE COMPLETE PUZZLE GUIDE</span>
-            <h1>Royal Smash!<br /><strong>Physics Puzzle Walkthrough</strong></h1>
+            <h1><span>Royal Smash! - Physics Puzzle</span><strong>Walkthrough</strong></h1>
             <p>Master Royal Smash! - Physics Puzzle with level-specific video previews, step-by-step solutions, helpful tips, and direct answers for Levels 1–80.</p>
             <div className="hero-buttons">
               <Link className="primary-button" href="#guides">View game guides</Link>
@@ -90,6 +99,8 @@ export default function Home() {
         <div className="section-heading"><span>★</span><h2>Tips &amp; Tricks</h2><p>Three habits that make every tower easier.</p></div>
         <div className="tips-grid">{tips.map(([number, title, description]) => <article key={number}><b>{number}</b><div><h3>{title}</h3><p>{description}</p></div></article>)}</div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(gameSchema) }} />
 
       <section id="faq" className="reference-section faq-section">
         <div className="section-heading"><span>?</span><h2>Frequently Asked Questions</h2></div>

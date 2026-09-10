@@ -45,3 +45,12 @@ test("groups guides by ten and uses per-level video covers", async () => {
   assert.match(media, /return level;/);
   assert.match(media, /videoPreviewUrl/);
 });
+
+test("publishes the exact official game name as visible text and structured data", async () => {
+  const [layout, homepage] = await Promise.all([read("app/layout.tsx"), read("app/page.tsx")]);
+  assert.match(layout, /applicationName: "Royal Smash! - Physics Puzzle Guide"/);
+  assert.match(layout, /<small>- Physics Puzzle Guide<\/small>/);
+  assert.match(homepage, /<span>Royal Smash! - Physics Puzzle<\/span>/);
+  assert.match(homepage, /"@type": "VideoGame"/);
+  assert.match(homepage, /sameAs: \[googlePlayUrl, appStoreUrl\]/);
+});
