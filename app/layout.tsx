@@ -8,18 +8,23 @@ const logoUrl = "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzb
 export const metadata: Metadata = {
   metadataBase: new URL("https://royal-smash.cc"),
   title: { default: "Royal Smash Walkthroughs & Level Solutions", template: "%s | Royal Smash Guide" },
-  description: "Clear Royal Smash: Physics Puzzle levels 51–80 with short step-by-step solutions, mistake fixes, and fast level navigation.",
+  description: "Clear Royal Smash levels 51–80 with short step-by-step solutions, mistake fixes, and fast level navigation.",
   alternates: { canonical: "/" },
   openGraph: { type: "website", siteName: "Royal Smash Guide", title: "Royal Smash Walkthroughs & Level Solutions", description: "Fast, focused help for Royal Smash levels 51–80.", url: "https://royal-smash.cc" },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
+  robots: { index: true, follow: true },
   icons: { icon: logoUrl, apple: logoUrl },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const schema = { "@context": "https://schema.org", "@type": "WebSite", name: "Royal Smash Guide", url: "https://royal-smash.cc/", description: "Independent Royal Smash: Physics Puzzle walkthroughs." };
+  const schema = { "@context": "https://schema.org", "@type": "WebSite", name: "Royal Smash Guide", url: "https://royal-smash.cc/", description: "Independent Royal Smash walkthroughs." };
   return <html lang="en"><body>
-    <header className="site-header"><Link className="logo" href="/"><Image className="brand-icon" src={logoUrl} alt="Royal Smash game logo" width={48} height={48} unoptimized/><span><b>Royal Smash</b><small>WALKTHROUGH</small></span></Link><nav aria-label="Main navigation"><Link href="/">Home</Link><Link href="/walkthrough">Walkthrough</Link><Link href="/#how-to-play">How to play</Link><Link href="/about">About</Link></nav><Link className="header-cta" href="/walkthrough">Find a level <span>→</span></Link></header>
+    <header className="reference-header"><div className="header-inner">
+      <Link className="reference-logo" href="/"><Image src={logoUrl} alt="Royal Smash logo" width={42} height={42} unoptimized/><b>Royal Smash</b></Link>
+      <nav aria-label="Main navigation"><Link href="/">⌂ <span>Home</span></Link><Link href="/walkthrough">▣ <span>Guides</span></Link><Link href="/#tips">★ <span>Tips</span></Link><Link href="/#about">ⓘ <span>About</span></Link></nav>
+      <form className="level-search" action="/walkthrough"><span>⌕</span><input aria-label="Search level" name="level" type="number" min="51" max="80" placeholder="Search level" /></form>
+      <Link className="mobile-guide-link" href="/walkthrough">☰</Link>
+    </div></header>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />{children}
-    <footer><div className="footer-brand"><Link className="logo" href="/"><Image className="brand-icon" src={logoUrl} alt="" width={48} height={48} unoptimized/><span><b>Royal Smash</b><small>WALKTHROUGH</small></span></Link><p>A cozy corner for clear, direct Royal Smash puzzle solutions.</p></div><div><h3>Explore</h3><nav><Link href="/">Home</Link><Link href="/walkthrough">All levels</Link><Link href="/about">About</Link></nav></div><div><h3>Information</h3><nav><Link href="/privacy">Privacy</Link><Link href="/contact">Corrections</Link></nav></div><small>© 2026 Royal Smash Guide · Independent fan-made resource.</small></footer>
+    <footer className="reference-footer"><div><Link className="reference-logo" href="/"><Image src={logoUrl} alt="" width={42} height={42} unoptimized/><b>Royal Smash</b></Link><p>Your friendly companion for Royal Smash puzzle solutions.</p></div><div><h3>Quick links</h3><Link href="/walkthrough">Game guides</Link><Link href="/#tips">Tips &amp; tricks</Link><Link href="/about">About us</Link></div><div><h3>Information</h3><Link href="/privacy">Privacy policy</Link><Link href="/contact">Contact &amp; corrections</Link></div><small>© 2026 Royal Smash Guide. Independent fan-made resource.</small></footer>
   </body></html>;
 }
