@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { guides } from "./levels";
-import { levelCoverUrl } from "./media";
+import { videoPreviewUrl } from "./media";
 
 const logoUrl =
   "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
 
 const googlePlayUrl = "https://play.google.com/store/apps/details?id=com.cyphergames.royalsmash";
 const appStoreUrl = "https://apps.apple.com/us/app/royal-smash-physics-puzzle/id6780891673";
-const guideGroups = [51, 61, 71].map((start) => ({ start, end: start + 9, guides: guides.filter((guide) => guide.level >= start && guide.level <= start + 9) }));
+const guideGroups = Array.from({ length: 8 }, (_, index) => index * 10 + 1).map((start) => ({ start, end: start + 9, guides: guides.filter((guide) => guide.level >= start && guide.level <= start + 9) }));
 
 export const metadata: Metadata = {
   title: { absolute: "Royal Smash Walkthrough – All Level Solutions" },
@@ -45,7 +45,7 @@ export default function Home() {
           <div className="hero-copy">
             <span className="hero-pill">THE COMPLETE PUZZLE GUIDE</span>
             <h1>Royal Smash<br /><strong>Walkthrough</strong></h1>
-            <p>Master every physics puzzle with simple step-by-step solutions, helpful tips, and direct answers for Levels 51–80.</p>
+            <p>Master every physics puzzle with simple step-by-step solutions, helpful tips, and direct answers for Levels 1–80.</p>
             <div className="hero-buttons">
               <Link className="primary-button" href="#guides">View game guides</Link>
               <Link className="secondary-button" href="#about">About the game</Link>
@@ -68,16 +68,16 @@ export default function Home() {
 
       <section id="featured" className="reference-section featured-levels">
         <div className="section-heading"><span>★</span><h2>Featured Levels</h2><p>The final challenge from each ten-level chapter.</p></div>
-        <div className="featured-grid">{[60, 70, 80].map((level) => <Link href={`/level/${level}`} key={level}><Image src={levelCoverUrl} alt={`Royal Smash Level ${level} opening screen`} width={480} height={270} unoptimized /><span>LEVEL {level - 9}–{level}</span><h3>Level {level} walkthrough</h3><p>Watch the solution and open the complete step-by-step guide.</p><b>View featured guide →</b></Link>)}</div>
+        <div className="featured-grid">{[10, 20, 30, 40, 50, 60, 70, 80].map((level) => <Link href={`/level/${level}`} key={level}><iframe className="level-cover-video" src={videoPreviewUrl(level)} title={`Royal Smash Level ${level} opening video`} loading="lazy" tabIndex={-1} /><span>LEVEL {level - 9}–{level}</span><h3>Level {level} walkthrough</h3><p>Watch the solution and open the complete step-by-step guide.</p><b>View featured guide →</b></Link>)}</div>
       </section>
 
       <section id="guides" className="reference-section guides-section">
         <div className="section-heading"><span>▣</span><h2>Royal Smash Level Guides</h2><p>Choose a chapter, then open the exact level you need.</p></div>
-        {guideGroups.map((group) => <div className="guide-chapter" key={group.start}><div className="guide-toolbar"><div><b>Levels {group.start}–{group.end}</b><small>10 walkthroughs with video solutions</small></div><Link href="/walkthrough">Complete guide index →</Link></div><div className="reference-guide-grid">{group.guides.map((guide) => <Link href={`/level/${guide.level}`} key={guide.level} className="level-cover-card"><span className="cover-wrap"><Image src={levelCoverUrl} alt={`Royal Smash Level ${guide.level} opening screen`} width={480} height={270} unoptimized /><i>LEVEL {guide.level}</i></span><strong>Level {guide.level}</strong><small>{guide.difficulty} · {guide.mechanic}</small><b>View guide →</b></Link>)}</div></div>)}
+        {guideGroups.map((group) => <div className="guide-chapter" key={group.start}><div className="guide-toolbar"><div><b>Levels {group.start}–{group.end}</b><small>10 walkthroughs with video solutions</small></div><Link href="/walkthrough">Complete guide index →</Link></div><div className="reference-guide-grid">{group.guides.map((guide) => <Link href={`/level/${guide.level}`} key={guide.level} className="level-cover-card"><span className="cover-wrap"><iframe className="level-cover-video" src={videoPreviewUrl(guide.level)} title={`Royal Smash Level ${guide.level} opening video`} loading="lazy" tabIndex={-1} /><i>LEVEL {guide.level}</i></span><strong>Level {guide.level}</strong><small>{guide.difficulty} · {guide.mechanic}</small><b>View guide →</b></Link>)}</div></div>)}
       </section>
 
       <section id="download" className="download-section">
-        <div className="download-copy"><span className="section-icon">↓</span><h2>Download Royal Smash</h2><p>Play the official Android game, then return here whenever a physics puzzle has you stuck.</p><div className="download-stats"><div><b>30</b><span>Guides</span></div><div><b>3</b><span>Steps each</span></div><div><b>100%</b><span>Free</span></div></div><div className="download-actions"><a className="store-button" href={googlePlayUrl} target="_blank" rel="noopener noreferrer"><span className="play-mark">▶</span><span><small>GET IT ON</small><b>Google Play</b></span></a><a className="store-button apple-store" href={appStoreUrl} target="_blank" rel="noopener noreferrer"><span className="apple-mark" aria-hidden="true"></span><span><small>DOWNLOAD ON THE</small><b>App Store</b></span></a><Link className="download-button" href="/walkthrough">Level guides <span>→</span></Link></div><small className="store-note">Google Play and App Store open the official game listings</small></div>
+        <div className="download-copy"><span className="section-icon">↓</span><h2>Download Royal Smash</h2><p>Play the official Android game, then return here whenever a physics puzzle has you stuck.</p><div className="download-stats"><div><b>80</b><span>Guides</span></div><div><b>3</b><span>Steps each</span></div><div><b>100%</b><span>Free</span></div></div><div className="download-actions"><a className="store-button" href={googlePlayUrl} target="_blank" rel="noopener noreferrer"><span className="play-mark">▶</span><span><small>GET IT ON</small><b>Google Play</b></span></a><a className="store-button apple-store" href={appStoreUrl} target="_blank" rel="noopener noreferrer"><span className="apple-mark" aria-hidden="true"></span><span><small>DOWNLOAD ON THE</small><b>App Store</b></span></a><Link className="download-button" href="/walkthrough">Level guides <span>→</span></Link></div><small className="store-note">Google Play and App Store open the official game listings</small></div>
         <div className="download-art"><div className="download-phone"><Image src={logoUrl} alt="Royal Smash app icon" width={480} height={960} unoptimized /></div></div>
       </section>
 
