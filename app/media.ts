@@ -1,13 +1,15 @@
 export const royalSmashPlaylist = "PLRUqLxqZJLf0";
-export const royalSmashFirstVideo = "hr_HTH0wYYM";
 
-/** The supplied playlist starts at Level 1, so its one-based index matches the level number. */
+/**
+ * The supplied playlist begins with Level 1. The YouTube playlist player uses
+ * a zero-based item offset, so Level 1 is item 0, Level 2 is item 1, and so on.
+ */
 export function videoIndex(level: number) {
-  return level;
+  return Math.max(0, level - 1);
 }
 
 export function videoEmbedUrl(level: number) {
-  return `https://www.youtube-nocookie.com/embed/${royalSmashFirstVideo}?list=${royalSmashPlaylist}&index=${videoIndex(level)}&rel=0`;
+  return `https://www.youtube-nocookie.com/embed/videoseries?list=${royalSmashPlaylist}&index=${videoIndex(level)}&rel=0&modestbranding=1`;
 }
 
 export function videoPreviewUrl(level: number) {
@@ -15,5 +17,5 @@ export function videoPreviewUrl(level: number) {
 }
 
 export function videoWatchUrl(level: number) {
-  return `https://www.youtube.com/watch?v=${royalSmashFirstVideo}&list=${royalSmashPlaylist}&index=${videoIndex(level)}`;
+  return `https://www.youtube.com/playlist?list=${royalSmashPlaylist}&index=${level}`;
 }
