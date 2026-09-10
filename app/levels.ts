@@ -1,6 +1,6 @@
 export type LevelGuide = {
   level: number;
-  difficulty: "Hard" | "Very Hard" | "Super Hard";
+  difficulty: "Easy" | "Medium" | "Hard" | "Very Hard" | "Super Hard";
   mechanic: string;
   focus: string;
   steps: string[];
@@ -16,13 +16,13 @@ const mechanics = [
   ["domino fall", "the outer column", "Tip the outer column toward the middle.", "Allow each section to contact the next.", "Clean up the last stable base after the chain stops."],
 ] as const;
 
-export const guides: LevelGuide[] = Array.from({ length: 30 }, (_, index) => {
-  const level = index + 51;
+export const guides: LevelGuide[] = Array.from({ length: 80 }, (_, index) => {
+  const level = index + 1;
   const m = mechanics[index % mechanics.length];
   const hard = [59, 60, 69, 70, 79, 80].includes(level);
   return {
     level,
-    difficulty: level % 10 === 0 ? "Super Hard" : hard ? "Very Hard" : "Hard",
+    difficulty: level <= 10 ? "Easy" : level <= 30 ? "Medium" : level % 10 === 0 ? "Super Hard" : hard ? "Very Hard" : "Hard",
     mechanic: m[0],
     focus: m[1],
     steps: [m[2], m[3], m[4]],
