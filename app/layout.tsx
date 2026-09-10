@@ -9,9 +9,9 @@ const logoUrl = "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzb
 export const metadata: Metadata = {
   metadataBase: new URL("https://royal-smash.cc"),
   title: { default: "Royal Smash Walkthroughs & Level Solutions", template: "%s | Royal Smash Guide" },
-  description: "Clear Royal Smash levels 51–80 with short step-by-step solutions, mistake fixes, and fast level navigation.",
+  description: "Clear Royal Smash levels 1–80 with short step-by-step solutions, mistake fixes, and fast level navigation.",
   alternates: { canonical: "/" },
-  openGraph: { type: "website", siteName: "Royal Smash Guide", title: "Royal Smash Walkthroughs & Level Solutions", description: "Fast, focused help for Royal Smash levels 51–80.", url: "https://royal-smash.cc" },
+  openGraph: { type: "website", siteName: "Royal Smash Guide", title: "Royal Smash Walkthroughs & Level Solutions", description: "Fast, focused help for Royal Smash levels 1–80.", url: "https://royal-smash.cc" },
   robots: { index: true, follow: true },
   icons: { icon: logoUrl, apple: logoUrl },
 };
