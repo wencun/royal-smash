@@ -28,3 +28,17 @@ test("publishes crawler discovery routes", async () => {
   assert.match(sitemap, /guides\.map/);
   assert.match(sitemap, /\/level\/\$\{g\.level\}/);
 });
+
+test("navigation exposes working level, download, and mobile destinations", async () => {
+  const [layout, homepage, search] = await Promise.all([
+    read("app/layout.tsx"),
+    read("app/page.tsx"),
+    read("app/components/LevelSearch.tsx"),
+  ]);
+  assert.match(layout, /href="\/#guides"/);
+  assert.match(layout, /href="\/#download"/);
+  assert.match(layout, /className="mobile-menu"/);
+  assert.match(homepage, /play\.google\.com\/store\/apps\/details\?id=com\.cyphergames\.royalsmash/);
+  assert.match(search, /router\.push\(`\/level\/\$\{selected\}`\)/);
+  assert.match(search, /selected < 51 \|\| selected > 80/);
+});

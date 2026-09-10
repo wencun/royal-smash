@@ -6,6 +6,8 @@ import { guides } from "./levels";
 const logoUrl =
   "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
 
+const googlePlayUrl = "https://play.google.com/store/apps/details?id=com.cyphergames.royalsmash";
+
 export const metadata: Metadata = {
   title: { absolute: "Royal Smash Walkthrough – All Level Solutions" },
   description:
@@ -63,14 +65,14 @@ export default function Home() {
 
       <section id="guides" className="reference-section guides-section">
         <div className="section-heading"><span>▣</span><h2>Royal Smash Game Guides</h2><p>Choose your level to open a focused walkthrough.</p></div>
-        <div className="guide-toolbar"><div><b>Level walkthroughs</b><small>Levels 51–80</small></div><Link href="/walkthrough">View all guides →</Link></div>
+        <div className="guide-toolbar"><div><b>Level walkthroughs</b><small>30 working guides · Levels 51–80</small></div><Link href="/walkthrough">Open guide index →</Link></div>
         <div className="reference-guide-grid">
           {guides.map((guide) => <Link href={`/level/${guide.level}`} key={guide.level}><span>LEVEL</span><strong>{guide.level}</strong><small>{guide.difficulty}</small><i>View guide →</i></Link>)}
         </div>
       </section>
 
       <section id="download" className="download-section">
-        <div className="download-copy"><span className="section-icon">↓</span><h2>Play Royal Smash</h2><p>Test your timing, challenge the laws of physics, and discover a satisfying new puzzle in every tower.</p><div className="download-stats"><div><b>30</b><span>Guides</span></div><div><b>3</b><span>Steps each</span></div><div><b>100%</b><span>Free</span></div></div><Link className="download-button" href="/walkthrough">Browse walkthroughs <span>→</span></Link></div>
+        <div className="download-copy"><span className="section-icon">↓</span><h2>Download Royal Smash</h2><p>Play the official Android game, then return here whenever a physics puzzle has you stuck.</p><div className="download-stats"><div><b>30</b><span>Guides</span></div><div><b>3</b><span>Steps each</span></div><div><b>100%</b><span>Free</span></div></div><div className="download-actions"><a className="store-button" href={googlePlayUrl} target="_blank" rel="noopener noreferrer"><span className="play-mark">▶</span><span><small>GET IT ON</small><b>Google Play</b></span></a><Link className="download-button" href="/walkthrough">Level guides <span>→</span></Link></div><small className="store-note">Android · Opens the official Google Play listing</small></div>
         <div className="download-art"><div className="download-phone"><Image src={logoUrl} alt="Royal Smash app icon" width={480} height={960} unoptimized /></div></div>
       </section>
 
