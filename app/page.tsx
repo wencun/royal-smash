@@ -53,7 +53,7 @@ export default function Home() {
           </div>
           <div className="hero-phone" aria-label="Royal Smash game preview">
             <div className="phone-shell"><Image src={logoUrl} alt="Royal Smash game artwork" width={480} height={960} priority unoptimized /></div>
-            <span className="float-card card-level"><b>30</b> levels ready</span>
+            <span className="float-card card-level"><b>80</b> levels ready</span>
             <span className="float-card card-free">✓ Free guides</span>
           </div>
         </div>
