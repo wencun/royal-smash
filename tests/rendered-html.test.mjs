@@ -4,10 +4,10 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("publishes 30 focused level guides from 51 through 80", async () => {
+test("publishes all 80 level guides", async () => {
   const source = await read("app/levels.ts");
-  assert.match(source, /length: 30/);
-  assert.match(source, /index \+ 51/);
+  assert.match(source, /length: 80/);
+  assert.match(source, /index \+ 1/);
   assert.match(source, /difficulty/);
   assert.match(source, /steps/);
 });
@@ -18,7 +18,7 @@ test("level pages are static, canonical, structured, and internally linked", asy
   assert.match(source, /generateStaticParams/);
   assert.match(source, /alternates:\s*\{\s*canonical:/);
   assert.match(source, /"@type":\s*"HowTo"/);
-  assert.match(source, /PREVIOUS/);
+  assert.match(source, /guide\.level > 1/);
   assert.match(source, /NEXT/);
 });
 
@@ -29,28 +29,19 @@ test("publishes crawler discovery routes", async () => {
   assert.match(sitemap, /\/level\/\$\{g\.level\}/);
 });
 
-test("navigation exposes working level, download, and mobile destinations", async () => {
-  const [layout, homepage, search] = await Promise.all([
-    read("app/layout.tsx"),
-    read("app/page.tsx"),
-    read("app/components/LevelSearch.tsx"),
-  ]);
+test("navigation supports every published level", async () => {
+  const [layout, homepage, search] = await Promise.all([read("app/layout.tsx"), read("app/page.tsx"), read("app/components/LevelSearch.tsx")]);
   assert.match(layout, /href="\/#guides"/);
-  assert.match(layout, /href="\/#download"/);
-  assert.match(layout, /className="mobile-menu"/);
-  assert.match(homepage, /play\.google\.com\/store\/apps\/details\?id=com\.cyphergames\.royalsmash/);
-  assert.match(search, /router\.push\(`\/level\/\$\{selected\}`\)/);
-  assert.match(search, /selected < 51 \|\| selected > 80/);
+  assert.match(homepage, /apps\.apple\.com\/us\/app\/royal-smash-physics-puzzle\/id6780891673/);
+  assert.match(search, /selected < 1 \|\| selected > 80/);
 });
 
-
-test("groups guides by ten and publishes Apple and per-level video destinations", async () => {
+test("groups guides by ten and uses per-level video covers", async () => {
   const [homepage, levelPage, media] = await Promise.all([read("app/page.tsx"), read("app/level/[level]/page.tsx"), read("app/media.ts")]);
-  assert.match(homepage, /guideGroups = \[51, 61, 71\]/);
-  assert.match(homepage, /apps\.apple\.com\/us\/search/);
-  assert.match(homepage, /Featured Levels/);
-  assert.match(levelPage, /className="level-video"/);
+  assert.match(homepage, /Array\.from\(\{ length: 8 \}/);
+  assert.match(homepage, /level-cover-video/);
   assert.match(levelPage, /Levels \{groupStart\}–\{groupStart \+ 9\}/);
   assert.match(media, /PLRUqLxqZJLf0/);
-  assert.match(media, /index=\$\{videoIndex\(level\)\}/);
+  assert.match(media, /return level;/);
+  assert.match(media, /videoPreviewUrl/);
 });
