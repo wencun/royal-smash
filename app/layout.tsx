@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
+import SiteNavigation from "./site-navigation";
 
 const logoUrl = "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
 
@@ -20,8 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return <html lang="en"><body>
     <header className="reference-header"><div className="header-inner">
       <Link className="reference-logo" href="/"><Image src={logoUrl} alt="Royal Smash logo" width={42} height={42} unoptimized/><b>Royal Smash</b></Link>
-      <nav aria-label="Main navigation"><Link href="/">⌂ <span>Home</span></Link><Link href="/walkthrough">▣ <span>Guides</span></Link><Link href="/#tips">★ <span>Tips</span></Link><Link href="/#about">ⓘ <span>About</span></Link></nav>
-      <form className="level-search" action="/walkthrough"><span>⌕</span><input aria-label="Search level" name="level" type="number" min="51" max="80" placeholder="Search level" /></form>
+      <SiteNavigation />
       <Link className="mobile-guide-link" href="/walkthrough">☰</Link>
     </div></header>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />{children}
