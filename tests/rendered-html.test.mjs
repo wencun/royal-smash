@@ -88,3 +88,16 @@ test("level picker uses accessible ten-level range tabs and concise SEO titles",
   assert.doesNotMatch(browser, /Watch the solution and open the complete step-by-step guide/);
   assert.doesNotMatch(browser, /View featured guide/);
 });
+
+test("loads the supplied advertising scripts at the top of every page", async () => {
+  const [layout, advertising] = await Promise.all([
+    read("app/layout.tsx"), read("app/components/Advertising.tsx"),
+  ]);
+  assert.match(layout, /<Advertising \/>/);
+  assert.ok(layout.indexOf("<Advertising />") < layout.indexOf("{children}"));
+  assert.match(advertising, /container-33161588d61c6f43df69cae3b48e4b22/);
+  assert.match(advertising, /pl31268833\.profitableratecpmnetwork\.com\/33161588d61c6f43df69cae3b48e4b22\/invoke\.js/);
+  assert.match(advertising, /pl31268835\.profitableratecpmnetwork\.com\/c0\/c5\/d1\/c0c5d1dd791b56db3fa550a47b823a4f\.js/);
+  assert.match(advertising, /pl31268834\.profitableratecpmnetwork\.com\/f0\/ba\/4d\/f0ba4da71c487450ed2b117c7c8180f9\.js/);
+  assert.match(advertising, /data-cfasync="false"/);
+});
