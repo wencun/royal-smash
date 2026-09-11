@@ -100,4 +100,7 @@ test("loads the supplied advertising scripts at the top of every page", async ()
   assert.match(advertising, /pl31268835\.profitableratecpmnetwork\.com\/c0\/c5\/d1\/c0c5d1dd791b56db3fa550a47b823a4f\.js/);
   assert.match(advertising, /pl31268834\.profitableratecpmnetwork\.com\/f0\/ba\/4d\/f0ba4da71c487450ed2b117c7c8180f9\.js/);
   assert.match(advertising, /data-cfasync="false"/);
+  assert.match(advertising, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-4539826019899948/);
+  assert.match(advertising, /id="google-adsense"/);
+  assert.match(advertising, /crossOrigin="anonymous"/);
 });

@@ -4,6 +4,13 @@ const containerId = "container-33161588d61c6f43df69cae3b48e4b22";
 
 export default function Advertising() {
   return <aside className="top-advertisement" aria-label="Advertisement">
+    <Script
+      id="google-adsense"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4539826019899948"
+      strategy="afterInteractive"
+      async
+      crossOrigin="anonymous"
+    />
     <div id={containerId} />
     <Script
       id="top-ad-container-script"
