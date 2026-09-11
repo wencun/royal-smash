@@ -1,8 +1,11 @@
 export const royalSmashPlaylist = "PLRUqLxqZJLf0";
 
-/** YouTube playlist positions are zero-based: Level 1 is item 0. */
+/**
+ * The YouTube playlist URL uses one-based positions. Keeping the public level
+ * number as the index prevents Level 2 from opening the Level 1 video.
+ */
 export function videoIndex(level: number) {
-  return Math.max(0, level - 1);
+  return Math.max(1, level);
 }
 
 /**
