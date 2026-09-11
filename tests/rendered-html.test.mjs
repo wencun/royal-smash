@@ -42,7 +42,7 @@ test("groups guides by ten and uses per-level video covers", async () => {
   assert.match(homepage, /level-cover-video/);
   assert.match(levelPage, /Levels \{groupStart\}–\{groupStart \+ 9\}/);
   assert.match(media, /PLRUqLxqZJLf0/);
-  assert.match(media, /return level;/);
+  assert.match(media, /level - 1/);
   assert.match(media, /videoPreviewUrl/);
 });
 
@@ -53,4 +53,13 @@ test("publishes the exact official game name as visible text and structured data
   assert.match(homepage, /<span>Royal Smash! - Physics Puzzle<\/span>/);
   assert.match(homepage, /"@type": "VideoGame"/);
   assert.match(homepage, /sameAs: \[googlePlayUrl, appStoreUrl\]/);
+});
+
+
+test("generates a distinct playlist position for every level thumbnail", async () => {
+  const media = await read("app/media.ts");
+  assert.match(media, /index: String\(videoIndex\(level\)\)/);
+  assert.match(media, /listType: "playlist"/);
+  assert.match(media, /return Math\.max\(0, level - 1\)/);
+  assert.match(media, /youtube-nocookie\.com\/embed\?\$\{params/);
 });
