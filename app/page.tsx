@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       <section id="guides" className="reference-section guides-section level-browser-section">
-        <div className="section-heading"><span>▣</span><h2>Browse Royal Smash Levels</h2><p>Pick a ten-level range, then choose the exact Royal Smash level you need.</p></div>
+        <div className="section-heading"><span>▣</span><h2>Browse Royal Smash Levels</h2><p>Pick a fifty-level range, then choose the exact Royal Smash level you need.</p></div>
         <LevelBrowser />
       </section>
 
