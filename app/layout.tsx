@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import LevelSearch from "./components/LevelSearch";
+import SiteNavigation from "./site-navigation";
 import "./globals.css";
 
 const logoUrl = "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
@@ -23,8 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return <html lang="en"><body>
     <header className="reference-header"><div className="header-inner">
       <Link className="reference-logo" href="/"><Image src={logoUrl} alt="Royal Smash logo" width={42} height={42} unoptimized/><span><b>Royal Smash!</b><small>- Physics Puzzle Guide</small></span></Link>
-      <nav aria-label="Main navigation"><Link href="/">⌂ <span>Home</span></Link><Link href="/#guides">▣ <span>Level Guides</span></Link><Link href="/#download">↓ <span>Download</span></Link><Link href="/#about">ⓘ <span>About</span></Link><Link href="/#faq">? <span>FAQ</span></Link></nav>
-      <LevelSearch />
+      <SiteNavigation />
       <details className="mobile-menu"><summary aria-label="Open navigation">☰</summary><div><Link href="/">Home</Link><Link href="/#guides">Level Guides</Link><Link href="/#download">Download Game</Link><Link href="/#about">About</Link><Link href="/#faq">FAQ</Link></div></details>
     </div></header>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />{children}

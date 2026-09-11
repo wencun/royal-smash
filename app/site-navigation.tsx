@@ -1,51 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import LevelSearch from "./components/LevelSearch";
 
 const items = [
-  { href: "/", icon: "⌂", label: "Home", hash: "" },
-  { href: "/walkthrough", icon: "▣", label: "Guides", hash: "" },
-  { href: "/#tips", icon: "★", label: "Tips", hash: "#tips" },
-  { href: "/#about", icon: "ⓘ", label: "About", hash: "#about" },
+  { href: "/", icon: "⌂", label: "Home", section: "" },
+  { href: "/#guides", icon: "▣", label: "Level Guides", section: "guides" },
+  { href: "/#download", icon: "↓", label: "Download", section: "download" },
+  { href: "/#about", icon: "ⓘ", label: "About", section: "about" },
+  { href: "/#faq", icon: "?", label: "FAQ", section: "faq" },
 ];
 
 export default function SiteNavigation() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [hash, setHash] = useState("");
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const updateHash = () => setHash(window.location.hash);
-    updateHash();
-    window.addEventListener("hashchange", updateHash);
-    return () => window.removeEventListener("hashchange", updateHash);
-  }, [pathname]);
+    if (pathname !== "/") return;
 
-  function searchLevel(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const level = Number(data.get("level"));
-    if (Number.isInteger(level) && level >= 51 && level <= 80) {
-      router.push(`/level/${level}`);
-    }
-  }
+    const updateActiveSection = () => {
+      const marker = window.scrollY + 130;
+      let current = "";
+      for (const item of items) {
+        if (!item.section) continue;
+        const section = document.getElementById(item.section);
+        if (section && section.offsetTop <= marker) current = item.section;
+      }
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("hashchange", updateActiveSection);
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("hashchange", updateActiveSection);
+    };
+  }, [pathname]);
 
   return <>
     <nav aria-label="Main navigation">
       {items.map((item) => {
-        const active = item.hash
-          ? pathname === "/" && hash === item.hash
-          : pathname === item.href && (item.href !== "/" || !hash);
-        return <Link className={active ? "active" : undefined} href={item.href} key={item.label} scroll>
+        const active = pathname === "/"
+          ? activeSection === item.section
+          : item.section === "guides" && (pathname === "/walkthrough" || pathname.startsWith("/level/"));
+        return <Link className={active ? "active" : undefined} href={item.href} key={item.label} aria-current={active ? "page" : undefined}>
           <span aria-hidden="true">{item.icon}</span><span>{item.label}</span>
         </Link>;
       })}
     </nav>
-    <form className="level-search" onSubmit={searchLevel}>
-      <span aria-hidden="true">⌕</span>
-      <input aria-label="Search level" name="level" type="number" min="51" max="80" placeholder="Search level" required />
-    </form>
+    <LevelSearch />
   </>;
 }

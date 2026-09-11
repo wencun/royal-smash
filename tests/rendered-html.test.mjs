@@ -63,3 +63,16 @@ test("uses the one-based YouTube playlist position for every level thumbnail", a
   assert.match(media, /return Math\.max\(1, level\)/);
   assert.match(media, /youtube-nocookie\.com\/embed\?\$\{params/);
 });
+
+test("header navigation follows the active home section", async () => {
+  const [layout, navigation, styles] = await Promise.all([
+    read("app/layout.tsx"), read("app/site-navigation.tsx"), read("app/globals.css"),
+  ]);
+  assert.match(layout, /<SiteNavigation \/>/);
+  assert.match(navigation, /window\.addEventListener\("scroll"/);
+  assert.match(navigation, /section\.offsetTop <= marker/);
+  assert.match(navigation, /className=\{active \? "active"/);
+  assert.match(navigation, /aria-current=\{active \? "page"/);
+  assert.match(styles, /nav a\.active/);
+  assert.doesNotMatch(styles, /nav a:first-child/);
+});
