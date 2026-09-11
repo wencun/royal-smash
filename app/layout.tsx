@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteNavigation from "./site-navigation";
 import Advertising from "./components/Advertising";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import "./globals.css";
 
 const logoUrl = "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const schema = { "@context": "https://schema.org", "@type": "WebSite", name: "Royal Smash! - Physics Puzzle Guide", alternateName: "Royal Smash Guide", url: "https://royal-smash.cc/", description: "Independent Royal Smash! - Physics Puzzle walkthroughs and level solutions." };
   return <html lang="en"><body>
+    <GoogleAnalytics />
     <header className="reference-header"><div className="header-inner">
       <Link className="reference-logo" href="/"><Image src={logoUrl} alt="Royal Smash logo" width={42} height={42} unoptimized/><span><b>Royal Smash!</b><small>- Physics Puzzle Guide</small></span></Link>
       <SiteNavigation />

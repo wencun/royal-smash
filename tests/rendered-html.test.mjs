@@ -104,3 +104,16 @@ test("loads the supplied advertising scripts at the top of every page", async ()
   assert.match(advertising, /id="google-adsense"/);
   assert.match(advertising, /crossOrigin="anonymous"/);
 });
+
+
+test("loads and configures Google Analytics on every page", async () => {
+  const [layout, analytics] = await Promise.all([
+    read("app/layout.tsx"), read("app/components/GoogleAnalytics.tsx"),
+  ]);
+  assert.match(layout, /<GoogleAnalytics \/>/);
+  assert.match(analytics, /G-TEJWJ3VLSW/);
+  assert.match(analytics, /www\.googletagmanager\.com\/gtag\/js\?id=/);
+  assert.match(analytics, /window\.dataLayer = window\.dataLayer \|\| \[\]/);
+  assert.match(analytics, /gtag\('js', new Date\(\)\)/);
+  assert.match(analytics, /gtag\('config', '\$\{measurementId\}'\)/);
+});
