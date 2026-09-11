@@ -42,7 +42,7 @@ test("groups guides by ten and uses per-level video covers", async () => {
   assert.match(media, /videoPreviewUrl/);
   assert.match(levelPage, /Levels \{groupStart\}–\{groupStart \+ 9\}/);
   assert.match(media, /PLRUqLxqZJLf0/);
-  assert.match(media, /Math\.max\(1, level\)/);
+  assert.match(media, /videoIdForLevel/);
   assert.match(media, /videoPreviewUrl/);
 });
 
@@ -56,13 +56,15 @@ test("publishes the exact official game name as visible text and structured data
 });
 
 
-test("uses the one-based YouTube playlist position for every published level", async () => {
-  const media = await read("app/media.ts");
-  assert.match(media, /index: String\(videoIndex\(level\)\)/);
-  assert.match(media, /listType: "playlist"/);
-  assert.match(media, /return Math\.max\(1, level\)/);
-  assert.match(media, /youtube-nocookie\.com\/embed\?\$\{params/);
-});
+test("uses verified per-level YouTube video IDs", async () => {
+  const [media, videoIds, levelPage] = await Promise.all([read("app/media.ts"), read("app/video-ids.ts"), read("app/level/[level]/page.tsx")]);
+  assert.match(media, /levelVideoIds\[level - 1\]/);
+  assert.match(media, /youtube-nocookie\.com\/embed\/\$\{videoId\}/);
+  assert.match(videoIds, /"JjGpUlrBqAs", \/\/ Level 352/);
+  assert.match(videoIds, /null, \/\/ Level 98/);
+  assert.match(videoIds, /null, \/\/ Level 142/);
+  assert.match(levelPage, /videoCoverageLabel/);
+})
 
 test("header navigation follows the active home section", async () => {
   const [layout, navigation, styles] = await Promise.all([

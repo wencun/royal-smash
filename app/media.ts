@@ -1,46 +1,31 @@
+import { levelVideoIds } from "./video-ids";
+
 export const royalSmashPlaylist = "PLRUqLxqZJLf0";
 
-/**
- * The YouTube playlist URL uses one-based positions. Keeping the public level
- * number as the index prevents Level 2 from opening the Level 1 video.
- */
-export function videoIndex(level: number) {
-  return Math.max(1, level);
-}
-
-/**
- * Use YouTube's playlist player with an explicit initial index. The old
- * /embed/videoseries URL rendered the playlist's first poster for every card.
- */
-function playlistPlayerUrl(level: number) {
-  const params = new URLSearchParams({
-    listType: "playlist",
-    list: royalSmashPlaylist,
-    index: String(videoIndex(level)),
-    rel: "0",
-    modestbranding: "1",
-    playsinline: "1",
-  });
-  return `https://www.youtube-nocookie.com/embed?${params.toString()}`;
+export function videoIdForLevel(level: number) {
+  return levelVideoIds[level - 1] ?? null;
 }
 
 export function videoEmbedUrl(level: number) {
-  return playlistPlayerUrl(level);
+  const videoId = videoIdForLevel(level);
+  if (!videoId) return null;
+  return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1`;
 }
 
 export function videoPreviewUrl(level: number) {
-  const params = new URLSearchParams({
-    controls: "0",
-    disablekb: "1",
-    fs: "0",
-  });
-  return `${playlistPlayerUrl(level)}&${params.toString()}`;
+  const embedUrl = videoEmbedUrl(level);
+  return embedUrl ? `${embedUrl}&controls=0&disablekb=1&fs=0` : null;
 }
 
 export function videoWatchUrl(level: number) {
-  const params = new URLSearchParams({
-    list: royalSmashPlaylist,
-    index: String(level),
-  });
-  return `https://www.youtube.com/playlist?${params.toString()}`;
+  const videoId = videoIdForLevel(level);
+  if (!videoId) return null;
+  return `https://www.youtube.com/watch?v=${videoId}&list=${royalSmashPlaylist}`;
+}
+
+export function videoCoverageLabel(level: number) {
+  if (level <= 300) return `Level ${level}`;
+  const start = Math.floor((level - 301) / 10) * 10 + 301;
+  const end = Math.min(start + 9, 370);
+  return `Levels ${start}–${end}`;
 }

@@ -13,9 +13,10 @@ const ranges = Array.from({ length: Math.ceil(MAX_LEVEL / RANGE_SIZE) }, (_, ind
 });
 function LevelCard({ level, featured = false, rangeStart }: { level: number; featured?: boolean; rangeStart?: number }) {
   const guide = guides[level - 1];
+  const previewUrl = videoPreviewUrl(level);
   return <Link href={`/level/${level}`} className={featured ? "featured-level-card" : "level-cover-card"}>
     <span className="cover-wrap">
-      <iframe className="level-cover-video" src={videoPreviewUrl(level)} title={`Royal Smash level ${level} opening video`} loading="lazy" tabIndex={-1} />
+      {previewUrl ? <iframe className="level-cover-video" src={previewUrl} title={`Royal Smash level ${level} opening video`} loading="lazy" tabIndex={-1} /> : <span className="video-unavailable">Video unavailable</span>}
       {!featured && <i>LEVEL {level}</i>}
     </span>
     {featured && <span className="featured-range">LEVELS {rangeStart}–{level}</span>}
