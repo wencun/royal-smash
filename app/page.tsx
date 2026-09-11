@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { guides } from "./levels";
-import { videoPreviewUrl } from "./media";
+import LevelBrowser from "./components/LevelBrowser";
 
 const logoUrl =
   "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
 
 const googlePlayUrl = "https://play.google.com/store/apps/details?id=com.cyphergames.royalsmash";
 const appStoreUrl = "https://apps.apple.com/us/app/royal-smash-physics-puzzle/id6780891673";
-const guideGroups = Array.from({ length: 8 }, (_, index) => index * 10 + 1).map((start) => ({ start, end: start + 9, guides: guides.filter((guide) => guide.level >= start && guide.level <= start + 9) }));
 
 export const metadata: Metadata = {
   title: { absolute: "Royal Smash! - Physics Puzzle Walkthroughs – All Level Solutions" },
@@ -75,14 +73,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="featured" className="reference-section featured-levels">
-        <div className="section-heading"><span>★</span><h2>Featured Royal Smash! - Physics Puzzle Levels</h2><p>The final challenge from each ten-level chapter.</p></div>
-        <div className="featured-grid">{[10, 20, 30, 40, 50, 60, 70, 80].map((level) => <Link href={`/level/${level}`} key={level}><iframe className="level-cover-video" src={videoPreviewUrl(level)} title={`Royal Smash Level ${level} opening video`} loading="lazy" tabIndex={-1} /><span>LEVEL {level - 9}–{level}</span><h3>Level {level} walkthrough</h3><p>Watch the solution and open the complete step-by-step guide.</p><b>View featured guide →</b></Link>)}</div>
-      </section>
-
-      <section id="guides" className="reference-section guides-section">
-        <div className="section-heading"><span>▣</span><h2>Royal Smash! - Physics Puzzle Level Guides</h2><p>Choose a chapter, then open the exact level you need.</p></div>
-        {guideGroups.map((group) => <div className="guide-chapter" key={group.start}><div className="guide-toolbar"><div><b>Levels {group.start}–{group.end}</b><small>10 walkthroughs with video solutions</small></div><Link href="/walkthrough">Complete guide index →</Link></div><div className="reference-guide-grid">{group.guides.map((guide) => <Link href={`/level/${guide.level}`} key={guide.level} className="level-cover-card"><span className="cover-wrap"><iframe className="level-cover-video" src={videoPreviewUrl(guide.level)} title={`Royal Smash Level ${guide.level} opening video`} loading="lazy" tabIndex={-1} /><i>LEVEL {guide.level}</i></span><strong>Level {guide.level}</strong><small>{guide.difficulty} · {guide.mechanic}</small><b>View guide →</b></Link>)}</div></div>)}
+      <section id="guides" className="reference-section guides-section level-browser-section">
+        <div className="section-heading"><span>▣</span><h2>Browse Royal Smash Levels</h2><p>Pick a ten-level range, then choose the exact Royal Smash level you need.</p></div>
+        <LevelBrowser />
       </section>
 
       <section id="download" className="download-section">

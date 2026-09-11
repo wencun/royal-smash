@@ -38,8 +38,8 @@ test("navigation supports every published level", async () => {
 
 test("groups guides by ten and uses per-level video covers", async () => {
   const [homepage, levelPage, media] = await Promise.all([read("app/page.tsx"), read("app/level/[level]/page.tsx"), read("app/media.ts")]);
-  assert.match(homepage, /Array\.from\(\{ length: 8 \}/);
-  assert.match(homepage, /level-cover-video/);
+  assert.match(homepage, /<LevelBrowser \/>/);
+  assert.match(media, /videoPreviewUrl/);
   assert.match(levelPage, /Levels \{groupStart\}–\{groupStart \+ 9\}/);
   assert.match(media, /PLRUqLxqZJLf0/);
   assert.match(media, /Math\.max\(1, level\)/);
@@ -75,4 +75,16 @@ test("header navigation follows the active home section", async () => {
   assert.match(navigation, /aria-current=\{active \? "page"/);
   assert.match(styles, /nav a\.active/);
   assert.doesNotMatch(styles, /nav a:first-child/);
+});
+
+
+test("level picker uses accessible ten-level range tabs and concise SEO titles", async () => {
+  const [homepage, browser] = await Promise.all([read("app/page.tsx"), read("app/components/LevelBrowser.tsx")]);
+  assert.match(homepage, /Browse Royal Smash Levels/);
+  assert.match(browser, /role="tablist"/);
+  assert.match(browser, /aria-selected=\{selected === tab.id\}/);
+  assert.match(browser, /Array\.from\(\{ length: 8 \}/);
+  assert.match(browser, /Royal Smash level \{level\}/);
+  assert.doesNotMatch(browser, /Watch the solution and open the complete step-by-step guide/);
+  assert.doesNotMatch(browser, /View featured guide/);
 });
