@@ -64,6 +64,9 @@ test("uses verified per-level YouTube video IDs", async () => {
   assert.match(videoIds, /null, \/\/ Level 98/);
   assert.match(videoIds, /null, \/\/ Level 142/);
   assert.match(levelPage, /videoCoverageLabel/);
+  assert.match(levelPage, /videoSourceCoverage/);
+  assert.match(media, /return `Level \${level}`/);
+  assert.match(media, /return `Levels \${start}–\${end}`/);
 });
 
 test("header navigation follows the active home section", async () => {
@@ -129,4 +132,14 @@ test("expands the video-backed guide library through Level 370", async () => {
   assert.match(browser, /Math\.min\(start \+ RANGE_SIZE - 1, MAX_LEVEL\)/);
   assert.match(search, /selected > MAX_LEVEL/);
   assert.match(walkthrough, /Math\.ceil\(MAX_LEVEL \/ 10\)/);
+});
+
+
+test("labels Level 350 as a Level 350 solution while disclosing its compilation source", async () => {
+  const [media, levelPage, videoIds] = await Promise.all([read("app/media.ts"), read("app/level/[level]/page.tsx"), read("app/video-ids.ts")]);
+  assert.match(videoIds, /"mgiIkyN-9T0", \/\/ Level 350/);
+  assert.match(media, /videoCoverageLabel\(level: number\)/);
+  assert.match(media, /videoSourceCoverage\(level: number\)/);
+  assert.match(levelPage, /<h2>\{videoLabel\} solution video<\/h2>/);
+  assert.match(levelPage, /YouTube compilation contains the Level/);
 });

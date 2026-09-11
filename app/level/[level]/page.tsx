@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGuide, guides } from "../../levels";
-import { videoCoverageLabel, videoEmbedUrl, videoWatchUrl } from "../../media";
+import { videoCoverageLabel, videoEmbedUrl, videoSourceCoverage, videoWatchUrl } from "../../media";
 
 export const dynamicParams = false;
 
@@ -34,6 +34,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
   const groupStart = Math.floor((guide.level - 1) / 10) * 10 + 1;
   const embedUrl = videoEmbedUrl(guide.level);
   const videoLabel = videoCoverageLabel(guide.level);
+  const sourceCoverage = videoSourceCoverage(guide.level);
   const watchUrl = videoWatchUrl(guide.level);
   const related = guides.filter((item) => item.level >= groupStart && item.level <= groupStart + 9);
   const previous = guide.level > 1 ? getGuide(guide.level - 1) : undefined;
@@ -79,7 +80,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
           <div>
             <p className="eyebrow">VIDEO WALKTHROUGH</p>
             <h2>{videoLabel} solution video</h2>
-            <p>This verified playlist video includes the solution for Level {guide.level}.</p>
+            <p>{sourceCoverage ? `The verified ${sourceCoverage} YouTube compilation contains the Level ${guide.level} solution.` : `This verified YouTube video is the dedicated solution for Level ${guide.level}.`}</p>
             {watchUrl && <a href={watchUrl} target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>}
           </div>
           <nav className="level-neighbors" aria-label="Adjacent level guides">

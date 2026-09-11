@@ -24,7 +24,11 @@ export function videoWatchUrl(level: number) {
 }
 
 export function videoCoverageLabel(level: number) {
-  if (level <= 300) return `Level ${level}`;
+  return `Level ${level}`;
+}
+
+export function videoSourceCoverage(level: number) {
+  if (level <= 300) return null;
   const start = Math.floor((level - 301) / 10) * 10 + 301;
   const end = Math.min(start + 9, 370);
   return `Levels ${start}–${end}`;
