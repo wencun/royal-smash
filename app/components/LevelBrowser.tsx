@@ -2,23 +2,23 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { guides } from "../levels";
+import { guides, MAX_LEVEL } from "../levels";
 import { videoPreviewUrl } from "../media";
 
-const ranges = Array.from({ length: 8 }, (_, index) => {
-  const start = index * 10 + 1;
-  return { id: `${start}-${start + 9}`, label: `Levels ${start}–${start + 9}`, start, end: start + 9 };
+const RANGE_SIZE = 50;
+const ranges = Array.from({ length: Math.ceil(MAX_LEVEL / RANGE_SIZE) }, (_, index) => {
+  const start = index * RANGE_SIZE + 1;
+  const end = Math.min(start + RANGE_SIZE - 1, MAX_LEVEL);
+  return { id: `${start}-${end}`, label: `Levels ${start}–${end}`, start, end };
 });
-const featuredLevels = ranges.map(({ end }) => end);
-
-function LevelCard({ level, featured = false }: { level: number; featured?: boolean }) {
+function LevelCard({ level, featured = false, rangeStart }: { level: number; featured?: boolean; rangeStart?: number }) {
   const guide = guides[level - 1];
   return <Link href={`/level/${level}`} className={featured ? "featured-level-card" : "level-cover-card"}>
     <span className="cover-wrap">
       <iframe className="level-cover-video" src={videoPreviewUrl(level)} title={`Royal Smash level ${level} opening video`} loading="lazy" tabIndex={-1} />
       {!featured && <i>LEVEL {level}</i>}
     </span>
-    {featured && <span className="featured-range">LEVEL {level - 9}–{level}</span>}
+    {featured && <span className="featured-range">LEVELS {rangeStart}–{level}</span>}
     <h3>Royal Smash level {level}</h3>
     {!featured && <><small>{guide.difficulty} · {guide.mechanic}</small><b>View guide →</b></>}
   </Link>;
@@ -27,18 +27,17 @@ function LevelCard({ level, featured = false }: { level: number; featured?: bool
 export default function LevelBrowser() {
   const [selected, setSelected] = useState("featured");
   const tabs = [{ id: "featured", label: "Featured" }, ...ranges];
+  const selectedRange = ranges.find(({ id }) => id === selected);
 
   return <div className="level-browser">
     <div className="range-tabs" role="tablist" aria-label="Browse Royal Smash levels by range">
       {tabs.map((tab) => <button key={tab.id} id={`tab-${tab.id}`} role="tab" aria-selected={selected === tab.id} aria-controls={`panel-${tab.id}`} tabIndex={selected === tab.id ? 0 : -1} onClick={() => setSelected(tab.id)}>{tab.label}</button>)}
     </div>
 
-    <section id="panel-featured" className="level-panel featured-grid" role="tabpanel" aria-labelledby="tab-featured" hidden={selected !== "featured"}>
-      {featuredLevels.map((level) => <LevelCard level={level} featured key={level} />)}
-    </section>
-
-    {ranges.map((range) => <section id={`panel-${range.id}`} className="level-panel reference-guide-grid" role="tabpanel" aria-labelledby={`tab-${range.id}`} hidden={selected !== range.id} key={range.id}>
-      {guides.filter((guide) => guide.level >= range.start && guide.level <= range.end).map((guide) => <LevelCard level={guide.level} key={guide.level} />)}
-    </section>)}
+    {selected === "featured" ? <section id="panel-featured" className="level-panel featured-grid" role="tabpanel" aria-labelledby="tab-featured">
+      {ranges.map((range) => <LevelCard level={range.end} rangeStart={range.start} featured key={range.id} />)}
+    </section> : selectedRange ? <section id={`panel-${selectedRange.id}`} className="level-panel reference-guide-grid" role="tabpanel" aria-labelledby={`tab-${selectedRange.id}`}>
+      {guides.slice(selectedRange.start - 1, selectedRange.end).map((guide) => <LevelCard level={guide.level} key={guide.level} />)}
+    </section> : null}
   </div>;
 }

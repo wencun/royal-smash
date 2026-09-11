@@ -4,9 +4,9 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
-test("publishes all 80 level guides", async () => {
+test("publishes all 370 level guides", async () => {
   const source = await read("app/levels.ts");
-  assert.match(source, /length: 80/);
+  assert.match(source, /length: MAX_LEVEL/);
   assert.match(source, /index \+ 1/);
   assert.match(source, /difficulty/);
   assert.match(source, /steps/);
@@ -33,7 +33,7 @@ test("navigation supports every published level", async () => {
   const [layout, homepage, search] = await Promise.all([read("app/layout.tsx"), read("app/page.tsx"), read("app/components/LevelSearch.tsx")]);
   assert.match(layout, /href="\/#guides"/);
   assert.match(homepage, /apps\.apple\.com\/us\/app\/royal-smash-physics-puzzle\/id6780891673/);
-  assert.match(search, /selected < 1 \|\| selected > 80/);
+  assert.match(search, /selected < 1 \|\| selected > MAX_LEVEL/);
 });
 
 test("groups guides by ten and uses per-level video covers", async () => {
@@ -56,7 +56,7 @@ test("publishes the exact official game name as visible text and structured data
 });
 
 
-test("uses the one-based YouTube playlist position for every level thumbnail", async () => {
+test("uses the one-based YouTube playlist position for every published level", async () => {
   const media = await read("app/media.ts");
   assert.match(media, /index: String\(videoIndex\(level\)\)/);
   assert.match(media, /listType: "playlist"/);
@@ -78,12 +78,12 @@ test("header navigation follows the active home section", async () => {
 });
 
 
-test("level picker uses accessible ten-level range tabs and concise SEO titles", async () => {
+test("level picker uses accessible fifty-level range tabs and concise SEO titles", async () => {
   const [homepage, browser] = await Promise.all([read("app/page.tsx"), read("app/components/LevelBrowser.tsx")]);
   assert.match(homepage, /Browse Royal Smash Levels/);
   assert.match(browser, /role="tablist"/);
   assert.match(browser, /aria-selected=\{selected === tab.id\}/);
-  assert.match(browser, /Array\.from\(\{ length: 8 \}/);
+  assert.match(browser, /Math\.ceil\(MAX_LEVEL \/ RANGE_SIZE\)/);
   assert.match(browser, /Royal Smash level \{level\}/);
   assert.doesNotMatch(browser, /Watch the solution and open the complete step-by-step guide/);
   assert.doesNotMatch(browser, /View featured guide/);
@@ -116,4 +116,15 @@ test("loads and configures Google Analytics on every page", async () => {
   assert.match(analytics, /window\.dataLayer = window\.dataLayer \|\| \[\]/);
   assert.match(analytics, /gtag\('js', new Date\(\)\)/);
   assert.match(analytics, /gtag\('config', '\$\{measurementId\}'\)/);
+});
+
+
+test("expands the video-backed guide library through Level 370", async () => {
+  const [levels, browser, search, walkthrough] = await Promise.all([read("app/levels.ts"), read("app/components/LevelBrowser.tsx"), read("app/components/LevelSearch.tsx"), read("app/walkthrough/page.tsx")]);
+  assert.match(levels, /MAX_LEVEL = 370/);
+  assert.match(levels, /length: MAX_LEVEL/);
+  assert.match(browser, /RANGE_SIZE = 50/);
+  assert.match(browser, /Math\.min\(start \+ RANGE_SIZE - 1, MAX_LEVEL\)/);
+  assert.match(search, /selected > MAX_LEVEL/);
+  assert.match(walkthrough, /Math\.ceil\(MAX_LEVEL \/ 10\)/);
 });

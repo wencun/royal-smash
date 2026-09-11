@@ -12,7 +12,7 @@ const appStoreUrl = "https://apps.apple.com/us/app/royal-smash-physics-puzzle/id
 export const metadata: Metadata = {
   title: { absolute: "Royal Smash! - Physics Puzzle Walkthroughs – All Level Solutions" },
   description:
-    "Royal Smash! - Physics Puzzle walkthroughs, tips, video previews, and direct solutions for Levels 1–80.",
+    "Royal Smash! - Physics Puzzle walkthroughs, tips, video previews, and direct solutions for Levels 1–370.",
   alternates: { canonical: "/" },
 };
 
@@ -30,7 +30,7 @@ const tips = [
 
 const faqs = [
   ["What is Royal Smash! - Physics Puzzle?", "Royal Smash! - Physics Puzzle is a mobile physics puzzle game where you remove or strike key blocks to bring down each structure."],
-  ["Which levels are covered?", "The walkthrough library includes a dedicated video preview and written solution for every Level 1 through Level 80."],
+  ["Which levels are covered?", "The walkthrough library includes a dedicated video preview and written solution for every Level 1 through Level 370."],
   ["Why can a move behave differently?", "Physics may vary slightly with tap position and timing. Pause between steps and use the recovery note in each guide."],
   ["Is this an official website?", "No. Royal Smash! - Physics Puzzle Guide is an independent fan-made walkthrough resource."],
 ];
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="hero-copy">
             <span className="hero-pill">THE COMPLETE PUZZLE GUIDE</span>
             <h1><span>Royal Smash! - Physics Puzzle</span><strong>Walkthrough</strong></h1>
-            <p>Master Royal Smash! - Physics Puzzle with level-specific video previews, step-by-step solutions, helpful tips, and direct answers for Levels 1–80.</p>
+            <p>Master Royal Smash! - Physics Puzzle with level-specific video previews, step-by-step solutions, helpful tips, and direct answers for Levels 1–370.</p>
             <div className="hero-buttons">
               <Link className="primary-button" href="#guides">View game guides</Link>
               <Link className="secondary-button" href="#about">About the game</Link>
@@ -60,7 +60,7 @@ export default function Home() {
           </div>
           <div className="hero-phone" aria-label="Royal Smash game preview">
             <div className="phone-shell"><Image src={logoUrl} alt="Royal Smash game artwork" width={480} height={960} priority unoptimized /></div>
-            <span className="float-card card-level"><b>80</b> levels ready</span>
+            <span className="float-card card-level"><b>370</b> levels ready</span>
             <span className="float-card card-free">✓ Free guides</span>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function Home() {
       </section>
 
       <section id="download" className="download-section">
-        <div className="download-copy"><span className="section-icon">↓</span><h2>Download Royal Smash! - Physics Puzzle</h2><p>Download Royal Smash! - Physics Puzzle from the official Android or iPhone store listing, then return here whenever a level has you stuck.</p><div className="download-stats"><div><b>80</b><span>Guides</span></div><div><b>3</b><span>Steps each</span></div><div><b>100%</b><span>Free</span></div></div><div className="download-actions"><a className="store-button" href={googlePlayUrl} target="_blank" rel="noopener noreferrer"><span className="play-mark">▶</span><span><small>GET IT ON</small><b>Google Play</b></span></a><a className="store-button apple-store" href={appStoreUrl} target="_blank" rel="noopener noreferrer"><span className="apple-mark" aria-hidden="true"></span><span><small>DOWNLOAD ON THE</small><b>App Store</b></span></a><Link className="download-button" href="/walkthrough">Level guides <span>→</span></Link></div><small className="store-note">Google Play and App Store open the official game listings</small></div>
+        <div className="download-copy"><span className="section-icon">↓</span><h2>Download Royal Smash! - Physics Puzzle</h2><p>Download Royal Smash! - Physics Puzzle from the official Android or iPhone store listing, then return here whenever a level has you stuck.</p><div className="download-stats"><div><b>370</b><span>Guides</span></div><div><b>3</b><span>Steps each</span></div><div><b>100%</b><span>Free</span></div></div><div className="download-actions"><a className="store-button" href={googlePlayUrl} target="_blank" rel="noopener noreferrer"><span className="play-mark">▶</span><span><small>GET IT ON</small><b>Google Play</b></span></a><a className="store-button apple-store" href={appStoreUrl} target="_blank" rel="noopener noreferrer"><span className="apple-mark" aria-hidden="true"></span><span><small>DOWNLOAD ON THE</small><b>App Store</b></span></a><Link className="download-button" href="/walkthrough">Level guides <span>→</span></Link></div><small className="store-note">Google Play and App Store open the official game listings</small></div>
         <div className="download-art"><div className="download-phone"><Image src={logoUrl} alt="Royal Smash app icon" width={480} height={960} unoptimized /></div></div>
       </section>
 

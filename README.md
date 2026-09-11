@@ -1,6 +1,6 @@
 # Royal Smash Guide
 
-SEO-first walkthrough site for **Royal Smash: Physics Puzzle**, covering Levels 51–80 at [royal-smash.cc](https://royal-smash.cc).
+SEO-first walkthrough site for **Royal Smash: Physics Puzzle**, covering Levels 51–370 at [royal-smash.cc](https://royal-smash.cc).
 
 ## Development
 

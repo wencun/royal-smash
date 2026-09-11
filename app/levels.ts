@@ -112,12 +112,14 @@ const finishingNotes = [
   "A single precise follow-up is usually safer than several quick corrections.",
 ] as const;
 
-export const guides: LevelGuide[] = Array.from({ length: 80 }, (_, index) => {
+export const MAX_LEVEL = 370;
+
+export const guides: LevelGuide[] = Array.from({ length: MAX_LEVEL }, (_, index) => {
   const level = index + 1;
   const family = boardFamilies[index % boardFamilies.length];
-  const chapter = chapterAngles[Math.floor(index / 10)];
+  const chapter = chapterAngles[Math.floor(index / 10) % chapterAngles.length];
   const finish = finishingNotes[index % finishingNotes.length];
-  const hard = [59, 60, 69, 70, 79, 80].includes(level);
+  const hard = level % 10 === 9;
   const difficulty = level <= 10 ? "Easy" : level <= 30 ? "Medium" : level % 10 === 0 ? "Super Hard" : hard ? "Very Hard" : "Hard";
 
   return {
