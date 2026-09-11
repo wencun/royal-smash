@@ -64,7 +64,7 @@ test("uses verified per-level YouTube video IDs", async () => {
   assert.match(videoIds, /null, \/\/ Level 98/);
   assert.match(videoIds, /null, \/\/ Level 142/);
   assert.match(levelPage, /videoCoverageLabel/);
-})
+});
 
 test("header navigation follows the active home section", async () => {
   const [layout, navigation, styles] = await Promise.all([
