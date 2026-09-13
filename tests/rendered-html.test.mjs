@@ -156,3 +156,10 @@ test("publishes one canonical host and all guides through the sitemap", async ()
   assert.match(levelPage, /"@type": "BreadcrumbList"/);
   assert.match(levelPage, /`\$\{SITE_URL\}\/level\/\$\{guide.level\}`/);
 });
+
+test("permanently redirects the alternate host to the canonical www host", async () => {
+  const config = await read("next.config.ts");
+  assert.match(config, /value: "royal-smash\.cc"/);
+  assert.match(config, /destination: "https:\/\/www\.royal-smash\.cc\/:path\*"/);
+  assert.match(config, /permanent: true/);
+});
