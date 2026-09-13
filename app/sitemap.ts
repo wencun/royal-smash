@@ -1,1 +1,22 @@
-import type { MetadataRoute } from "next";import{guides}from"./levels";export default function sitemap():MetadataRoute.Sitemap{const base="https://royal-smash.cc";return[{url:base,lastModified:new Date(),changeFrequency:"weekly",priority:1},{url:`${base}/walkthrough`,lastModified:new Date(),changeFrequency:"weekly",priority:.9},...guides.map(g=>({url:`${base}/level/${g.level}`,lastModified:new Date(),changeFrequency:"monthly" as const,priority:.8})),...['about','privacy','contact'].map(p=>({url:`${base}/${p}`,lastModified:new Date(),changeFrequency:"yearly" as const,priority:.3}))]}
+import type { MetadataRoute } from "next";
+import { guides } from "./levels";
+import { CONTENT_UPDATED_AT, SITE_URL } from "./site";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    { url: SITE_URL, lastModified: CONTENT_UPDATED_AT, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/walkthrough`, lastModified: CONTENT_UPDATED_AT, changeFrequency: "weekly", priority: 0.9 },
+    ...guides.map((guide) => ({
+      url: `${SITE_URL}/level/${guide.level}`,
+      lastModified: CONTENT_UPDATED_AT,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...["about", "privacy", "contact"].map((page) => ({
+      url: `${SITE_URL}/${page}`,
+      lastModified: CONTENT_UPDATED_AT,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
+  ];
+}

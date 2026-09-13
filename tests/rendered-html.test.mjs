@@ -24,9 +24,9 @@ test("level pages are static, canonical, structured, and internally linked", asy
 
 test("publishes crawler discovery routes", async () => {
   const [robots, sitemap] = await Promise.all([read("app/robots.ts"), read("app/sitemap.ts")]);
-  assert.match(robots, /royal-smash\.cc\/sitemap\.xml/);
+  assert.match(robots, /`\$\{SITE_URL\}\/sitemap\.xml`/);
   assert.match(sitemap, /guides\.map/);
-  assert.match(sitemap, /\/level\/\$\{g\.level\}/);
+  assert.match(sitemap, /\/level\/\$\{guide\.level\}/);
 });
 
 test("navigation supports every published level", async () => {
@@ -142,4 +142,17 @@ test("labels Level 350 as a Level 350 solution while disclosing its compilation 
   assert.match(media, /videoSourceCoverage\(level: number\)/);
   assert.match(levelPage, /<h2>\{videoLabel\} solution video<\/h2>/);
   assert.match(levelPage, /YouTube compilation contains the Level/);
+});
+
+
+test("publishes one canonical host and all guides through the sitemap", async () => {
+  const [site, sitemap, robots, layout, levelPage] = await Promise.all([read("app/site.ts"), read("app/sitemap.ts"), read("app/robots.ts"), read("app/layout.tsx"), read("app/level/[level]/page.tsx")]);
+  assert.match(site, /SITE_URL = "https:\/\/www\.royal-smash\.cc"/);
+  assert.match(sitemap, /guides\.map/);
+  assert.match(sitemap, /CONTENT_UPDATED_AT/);
+  assert.doesNotMatch(sitemap, /new Date\(\)/);
+  assert.match(robots, /`\$\{SITE_URL\}\/sitemap\.xml`/);
+  assert.match(layout, /new URL\(SITE_URL\)/);
+  assert.match(levelPage, /"@type": "BreadcrumbList"/);
+  assert.match(levelPage, /`\$\{SITE_URL\}\/level\/\$\{guide.level\}`/);
 });

@@ -4,24 +4,25 @@ import Link from "next/link";
 import SiteNavigation from "./site-navigation";
 import Advertising from "./components/Advertising";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import { SITE_URL } from "./site";
 import "./globals.css";
 
 const logoUrl = "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://royal-smash.cc"),
+  metadataBase: new URL(SITE_URL),
   applicationName: "Royal Smash! - Physics Puzzle Guide",
   title: { default: "Royal Smash! - Physics Puzzle Walkthroughs & Level Solutions", template: "%s | Royal Smash! - Physics Puzzle Guide" },
   description: "Clear Royal Smash! - Physics Puzzle Levels 1–370 with matching video previews, distinct step-by-step solutions, and fast level navigation.",
   alternates: { canonical: "/" },
-  openGraph: { type: "website", siteName: "Royal Smash! - Physics Puzzle Guide", title: "Royal Smash! - Physics Puzzle Walkthroughs & Level Solutions", description: "Fast, focused help for Royal Smash! - Physics Puzzle Levels 1–370.", url: "https://royal-smash.cc" },
+  openGraph: { type: "website", siteName: "Royal Smash! - Physics Puzzle Guide", title: "Royal Smash! - Physics Puzzle Walkthroughs & Level Solutions", description: "Fast, focused help for Royal Smash! - Physics Puzzle Levels 1–370.", url: SITE_URL },
   robots: { index: true, follow: true },
   keywords: ["Royal Smash! - Physics Puzzle", "Royal Smash walkthrough", "Royal Smash level guide", "Royal Smash solutions"],
   icons: { icon: logoUrl, apple: logoUrl },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const schema = { "@context": "https://schema.org", "@type": "WebSite", name: "Royal Smash! - Physics Puzzle Guide", alternateName: "Royal Smash Guide", url: "https://royal-smash.cc/", description: "Independent Royal Smash! - Physics Puzzle walkthroughs and level solutions." };
+  const schema = { "@context": "https://schema.org", "@type": "WebSite", name: "Royal Smash! - Physics Puzzle Guide", alternateName: "Royal Smash Guide", url: `${SITE_URL}/`, description: "Independent Royal Smash! - Physics Puzzle walkthroughs and level solutions." };
   return <html lang="en"><body>
     <GoogleAnalytics />
     <header className="reference-header"><div className="header-inner">

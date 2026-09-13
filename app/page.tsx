@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import LevelBrowser from "./components/LevelBrowser";
+import { SITE_URL } from "./site";
 
 const logoUrl =
   "https://play-lh.googleusercontent.com/VqJWXEzCPnmd4pCVdTBOvzYzbRs9u_BEcKVWUuL07RhKCtUmun3J5qC2p9_1C0A27Fpg8EaGUaE8AmDmF1pBfA=w480-h960-rw";
@@ -40,7 +41,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "VideoGame",
     name: "Royal Smash! - Physics Puzzle",
-    url: "https://royal-smash.cc/",
+    url: `${SITE_URL}/`,
     gamePlatform: ["Android", "iOS"],
     applicationCategory: "Puzzle Game",
     sameAs: [googlePlayUrl, appStoreUrl],

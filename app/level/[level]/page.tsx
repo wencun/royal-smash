@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGuide, guides } from "../../levels";
 import { videoCoverageLabel, videoEmbedUrl, videoSourceCoverage, videoWatchUrl } from "../../media";
+import { SITE_URL } from "../../site";
 
 export const dynamicParams = false;
 
@@ -41,6 +42,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
   const next = guide.level < guides.length ? getGuide(guide.level + 1) : undefined;
   const schema = {
     "@context": "https://schema.org",
+    "@graph": [{
     "@type": "HowTo",
     name: "How to beat Royal Smash! - Physics Puzzle Level " + guide.level,
     step: guide.steps.map((text, index) => ({
@@ -49,6 +51,14 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
       name: guide.stepTitles[index],
       text,
     })),
+    }, {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Level Guides", item: `${SITE_URL}/walkthrough` },
+        { "@type": "ListItem", position: 3, name: `Royal Smash Level ${guide.level}`, item: `${SITE_URL}/level/${guide.level}` },
+      ],
+    }],
   };
 
   return (

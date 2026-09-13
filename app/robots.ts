@@ -1,1 +1,10 @@
-import type { MetadataRoute } from "next";export default function robots():MetadataRoute.Robots{return{rules:{userAgent:"*",allow:"/"},sitemap:"https://royal-smash.cc/sitemap.xml",host:"https://royal-smash.cc"}}
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "./site";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: { userAgent: "*", allow: "/" },
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
+  };
+}
